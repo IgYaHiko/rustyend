@@ -9,7 +9,7 @@ mod mail;
 mod handler;
 mod routes;
 
-
+use std::sync::Arc;
 use sqlx::postgres::PgPoolOptions;
 use dotenv::dotenv;
 use axum::{Extension, Router, http::{HeaderValue, Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}}, routing::Route};
@@ -17,6 +17,7 @@ use config::Config;
 use db::DBClient;
 use tower_http::cors::CorsLayer;
 use tracing_subscriber::filter::LevelFilter;
+use crate::routes::create_router;
 #[derive(Debug, Clone)]
 pub struct AppState {
     pub env: Config,
@@ -55,9 +56,7 @@ async fn main() {
         db_client,
     };
 
-    let app = Router::new()
-            .layer(Extension(app_state))
-            .layer(cors.clone());
+    let app = create_router(Arc::new(app_state.clone())).layer(cors.clone());
     println!(
         "{}",
         format!("Server is runnning on http://localhost:{}",config.port)
