@@ -5,6 +5,9 @@ mod error;
 mod db;
 mod utils;
 mod middleware;
+mod mail;
+mod handler;
+mod routes;
 
 
 use sqlx::postgres::PgPoolOptions;
