@@ -25,6 +25,7 @@ pub enum ErrorMessage {
     InvalidHashFormat,
     HashingError,
     InvalidToken,
+    #[allow(dead_code)]
     ServerError,
     WrongCredentials,
     EmailExist,

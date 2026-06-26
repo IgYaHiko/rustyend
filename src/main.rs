@@ -12,7 +12,7 @@ mod routes;
 use std::sync::Arc;
 use sqlx::postgres::PgPoolOptions;
 use dotenv::dotenv;
-use axum::{Extension, Router, http::{HeaderValue, Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}}, routing::Route};
+use axum::{http::{HeaderValue, Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}}};
 use config::Config;
 use db::DBClient;
 use tower_http::cors::CorsLayer;
