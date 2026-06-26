@@ -119,11 +119,11 @@ pub struct RoleUpdateDto {
     #[validate(custom = "validate_user_role")]
     pub role: UserRole,
 }
-
+#[allow(unreachable_patterns)]
 fn validate_user_role(role: &UserRole) -> Result<(), validator::ValidationError> {
     match role {
         UserRole::Admin | UserRole::User => Ok(()),
-        _ => Err(validator::ValidationError::new("invalid_role")),
+        _  => Err(validator::ValidationError::new("invalid_role")),
     }
 }
 
